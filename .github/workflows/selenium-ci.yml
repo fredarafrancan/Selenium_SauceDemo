@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set up Python
@@ -19,10 +19,13 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install selenium pytest
+          pip install selenium pytest webdriver-manager
 
       - name: Run Selenium tests
         run: pytest
