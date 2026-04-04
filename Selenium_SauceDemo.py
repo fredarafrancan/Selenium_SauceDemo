@@ -2,12 +2,20 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
+#import time
 
 def test_login_saucedemo():
     # Use local ChromeDriver (must be in PATH)
-    driver = webdriver.Chrome()
-    driver.maximize_window()
+    #driver = webdriver.Chrome()
+    #driver.maximize_window()
+
+    # Chrome options
+    options = webdriver.ChromeOptions()
+    options.add_argument("--headless")  # Run without GUI
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+
+    driver = webdriver.Chrome(options=options)
 
     wait = WebDriverWait(driver, 10)
 
@@ -43,7 +51,7 @@ def test_login_saucedemo():
     assert inventory.is_displayed(), "Login failed!"
 
     print("Login successful!")
-    time.sleep(20)
+    #time.sleep(20)
     driver.quit()
 
 
